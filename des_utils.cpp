@@ -45,12 +45,10 @@ vector<unsigned char> DESUtils::des_decrypt(const vector<unsigned char>& ciphert
     }
 
     DES_key_schedule key_schedule;
-    
-    // Копируем ключ
+
     DES_cblock key_copy;
     memcpy(key_copy, key, sizeof(DES_cblock));
     
-    // Устанавливаем ключ
     if (DES_set_key_checked(&key_copy, &key_schedule)) {
         cerr << "Weak key detected!" << endl;
         return {};
@@ -69,10 +67,8 @@ vector<unsigned char> DESUtils::des_decrypt(const vector<unsigned char>& ciphert
             DES_DECRYPT
         );
         
-        // Копируем результат обратно в вектор
         memcpy(&plaintext[i], &output_block, 8);
     }
-    // Удаляем padding PKCS#7
     size_t pad_len = plaintext.back();
     if (pad_len > 0 && pad_len <= 8) {
         plaintext.resize(plaintext.size() - pad_len);
@@ -172,10 +168,6 @@ bool DESUtils::decrypt_file(const string& input_file, const string& output_file,
     return true;
 }
 
-// В des_utils.h
-
-
-// В des_utils.cpp
 void DESUtils::generate_random_key(DES_cblock* key) {
     if (!key) {
         throw std::invalid_argument("Key pointer is null");

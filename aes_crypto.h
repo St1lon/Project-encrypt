@@ -23,4 +23,4 @@ public:
         const array<unsigned char, 16>& iv);
 };
 
-#endif // AES_MENU_H
+#endif

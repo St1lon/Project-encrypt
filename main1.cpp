@@ -5,7 +5,6 @@
 #include "aes_crypto.h"
 #include <cmath>
 #include <vector>
-//#include <c lib>
 #include <ctime>
 #include <sstream>
 #include <fstream>
@@ -41,7 +40,7 @@ void ShowFile(const string& filename){
         }
         file.close();
     } else {
-        cerr << "Could not open the file." << endl;
+        cerr << "Нельзя открыть файл" << endl;
     }
 }
 
@@ -57,7 +56,7 @@ void des_menu() {
     while (true) {
         cout << "\nМеню DES:\n";
         cout << "1. Шифровать файл\n";
-        cout << "2. Дешифровать файл\n";
+        cout << "2. Расшифровать файл\n";
         cout << "0. Выход\n";
         cout << "Выбор: ";
         cin >> choice;
@@ -227,7 +226,7 @@ void rsa_menu() {
         cout << "\nМеню RSA:\n";
         cout << "1. Шифровать файл\n";
         cout << "2. Дешифровать файл\n";
-        cout << "3. Очистить текущий ключ\n";  // Новая опция
+        cout << "3. Очистить текущий ключ\n";
         cout << "0. Выход\n";
         cout << "Выбор: ";
         cin >> choice;
@@ -292,8 +291,6 @@ void rsa_menu() {
                         } else {
                             cout << "Ошибка при шифровании!\n";
                         }
-                        
-                        // Очищаем ключ после операции
                         n = e = d = 0;
                         key_loaded = false;
                         break;
@@ -332,10 +329,8 @@ void rsa_menu() {
                 cout << "Содержимое выходного файла: \n";
                 ShowFile(output_file);
             } else {
-                cout << "Ошибка при дешифровании!\n";
+                cout << "Ошибка при расшифровании!\n";
             }
-            
-            // Очищаем ключ после операции
             n = e = d = 0;
             key_loaded = false;
         }
@@ -353,7 +348,7 @@ void aes_menu() {
     while (true) {
         cout << "\nМеню AES-256:\n";
         cout << "1. Шифровать файл\n";
-        cout << "2. Дешифровать файл\n";
+        cout << "2. Расшифровать файл\n";
         cout << "0. Выход\n";
         cout << "Выбор: ";
         cin >> choice;
@@ -508,12 +503,12 @@ void aes_menu() {
             cin >> output_file;
 
             if (AesMenu::decrypt_file(input_file, output_file, key, iv)) {
-                cout << "Файл дешифрован!\n";
+                cout << "Файл расшифрован!\n";
                 cout << "Результат:\n";
                 AesMenu::show_file_content(output_file);
             }
             else {
-                cout << "Ошибка дешифрования!\n";
+                cout << "Ошибка расшифрования!\n";
             }
         }
     }

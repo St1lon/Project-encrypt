@@ -18,4 +18,4 @@ public:
     static void generate_random_key(DES_cblock* key);
 };
 
-#endif // DES_UTILS_H
+#endif 
