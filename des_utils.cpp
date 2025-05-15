@@ -18,7 +18,7 @@ vector<unsigned char> DESUtils::des_encrypt(const vector<unsigned char>& plainte
     memcpy(key_copy, key, sizeof(DES_cblock));
 
     if (DES_set_key_checked(&key_copy, &key_schedule)) {
-        cerr << "Weak key detected!" << endl;
+        cerr << "Слабый ключ" << endl;
         return {};
     }
     size_t pad_len = 8 - (plaintext.size() % 8);
@@ -40,7 +40,7 @@ vector<unsigned char> DESUtils::des_encrypt(const vector<unsigned char>& plainte
 
 vector<unsigned char> DESUtils::des_decrypt(const vector<unsigned char>& ciphertext, const DES_cblock& key) {
     if (ciphertext.size() % 8 != 0) {
-        cerr << "Invalid ciphertext size (must be multiple of 8)" << endl;
+        cerr << "Недопустимый размер зашифрованного текста (должен быть кратен 8)" << endl;
         return {};
     }
 
@@ -50,7 +50,7 @@ vector<unsigned char> DESUtils::des_decrypt(const vector<unsigned char>& ciphert
     memcpy(key_copy, key, sizeof(DES_cblock));
     
     if (DES_set_key_checked(&key_copy, &key_schedule)) {
-        cerr << "Weak key detected!" << endl;
+        cerr << "Слабый ключ" << endl;
         return {};
     }
 
@@ -114,7 +114,7 @@ vector<unsigned char> DESUtils::base64_decode(const string& encoded) {
 bool DESUtils::encrypt_file(const string& input_file, const string& output_file, const DES_cblock& key) {
     ifstream in(input_file, ios::binary);
     if (!in) {
-        cerr << "Cannot open input file: " << input_file << endl;
+        cerr << "Нельзя открыть файл: " << input_file << endl;
         return false;
     }
 
@@ -130,7 +130,7 @@ bool DESUtils::encrypt_file(const string& input_file, const string& output_file,
 
     ofstream out(output_file);
     if (!out) {
-        cerr << "Cannot open output file: " << output_file << endl;
+        cerr << "Нельзя открыть файл: " << output_file << endl;
         return false;
     }
 
@@ -143,7 +143,7 @@ bool DESUtils::encrypt_file(const string& input_file, const string& output_file,
 bool DESUtils::decrypt_file(const string& input_file, const string& output_file, const DES_cblock& key) {
     ifstream in(input_file);
     if (!in) {
-        cerr << "Cannot open input file: " << input_file << endl;
+        cerr << "Нельзя открыть файл: " << input_file << endl;
         return false;
     }
 
@@ -158,7 +158,7 @@ bool DESUtils::decrypt_file(const string& input_file, const string& output_file,
 
     ofstream out(output_file, ios::binary);
     if (!out) {
-        cerr << "Cannot open output file: " << output_file << endl;
+        cerr << "Нельзя открыть файл: " << output_file << endl;
         return false;
     }
 
@@ -170,7 +170,7 @@ bool DESUtils::decrypt_file(const string& input_file, const string& output_file,
 
 void DESUtils::generate_random_key(DES_cblock* key) {
     if (!key) {
-        throw std::invalid_argument("Key pointer is null");
+        throw std::invalid_argument("Значение указателя ключа равно нулю");
     }
     
     if (RAND_bytes(*key, sizeof(DES_cblock)) != 1) {

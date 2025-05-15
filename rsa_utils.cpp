@@ -105,7 +105,7 @@ string RSAUtils::decrypt(const string& encrypted_message, long long d, long long
 bool RSAUtils::encrypt_file(const string& input_file, const string& output_file, long long e, long long n) {
     ifstream in(input_file);
     if (!in) {
-        cerr << "Cannot open input file: " << input_file << endl;
+        cerr << "Нельзя открыть файл: " << input_file << endl;
         return false;
     }
 
@@ -116,7 +116,7 @@ bool RSAUtils::encrypt_file(const string& input_file, const string& output_file,
 
     ofstream out(output_file);
     if (!out) {
-        cerr << "Cannot open output file: " << output_file << endl;
+        cerr << "Нельзя открыть файл: " << output_file << endl;
         return false;
     }
 
@@ -129,7 +129,7 @@ bool RSAUtils::encrypt_file(const string& input_file, const string& output_file,
 bool RSAUtils::decrypt_file(const string& input_file, const string& output_file, long long d, long long n) {
     ifstream in(input_file);
     if (!in) {
-        cerr << "Cannot open input file: " << input_file << endl;
+        cerr << "Нельзя открыть файл: " << input_file << endl;
         return false;
     }
 
@@ -140,7 +140,7 @@ bool RSAUtils::decrypt_file(const string& input_file, const string& output_file,
 
     ofstream out(output_file);
     if (!out) {
-        cerr << "Cannot open output file: " << output_file << endl;
+        cerr << "Нельзя открыть файл: " << output_file << endl;
         return false;
     }
 
